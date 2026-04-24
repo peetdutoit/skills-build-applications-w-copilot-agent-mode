@@ -23,11 +23,18 @@ const Workouts = () => {
       .finally(() => setLoading(false));
   }, [url]);
 
-  const filteredWorkouts = workouts.filter((workout) =>
-    `${workout.name} ${workout.description} ${Array.isArray(workout.suggested_for) ? workout.suggested_for.join(' ') : workout.suggested_for}`
-      .toLowerCase()
-      .includes(filter.toLowerCase()),
-  );
+  const formatSuggestedFor = (suggestedFor) => {
+    if (!Array.isArray(suggestedFor)) return suggestedFor || '';
+    return suggestedFor
+      .map((user) => (typeof user === 'string' ? user : user.name || user.email || user.id || ''))
+      .filter(Boolean)
+      .join(', ');
+  };
+
+  const filteredWorkouts = workouts.filter((workout) => {
+    const suggestedForText = formatSuggestedFor(workout.suggested_for);
+    return `${workout.name} ${workout.description} ${suggestedForText}`.toLowerCase().includes(filter.toLowerCase());
+  });
 
   return (
     <div className="container my-4">
@@ -85,7 +92,7 @@ const Workouts = () => {
                     <tr key={workout.id}>
                       <td>{workout.name}</td>
                       <td>{workout.description}</td>
-                      <td>{Array.isArray(workout.suggested_for) ? workout.suggested_for.join(', ') : workout.suggested_for}</td>
+                      <td>{formatSuggestedFor(workout.suggested_for)}</td>
                     </tr>
                   ))}
                 </tbody>

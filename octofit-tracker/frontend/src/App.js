@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import Users from './components/Users';
 import Teams from './components/Teams';
@@ -24,51 +24,49 @@ const Home = () => (
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-          <div className="container-fluid">
-            <NavLink className="navbar-brand" to="/">
-              OctoFit Tracker
-            </NavLink>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
-                {['Home', 'Users', 'Teams', 'Activities', 'Workouts', 'Leaderboard'].map((label) => {
-                  const path = label === 'Home' ? '/' : `/${label.toLowerCase()}`;
-                  return (
-                    <li key={label} className="nav-item">
-                      <NavLink className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} to={path}>
-                        {label}
-                      </NavLink>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+    <div className="App">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div className="container-fluid">
+          <NavLink className="navbar-brand" to="/">
+            OctoFit Tracker
+          </NavLink>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              {['Home', 'Users', 'Teams', 'Activities', 'Workouts', 'Leaderboard'].map((label) => {
+                const path = label === 'Home' ? '/' : `/${label.toLowerCase()}`;
+                return (
+                  <li key={label} className="nav-item">
+                    <NavLink className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} to={path}>
+                      {label}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/teams" element={<Teams />} />
-          <Route path="/activities" element={<Activities />} />
-          <Route path="/workouts" element={<Workouts />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-        </Routes>
-      </div>
-    </Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/workouts" element={<Workouts />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+      </Routes>
+    </div>
   );
 }
 
