@@ -94,26 +94,28 @@ const Leaderboard = () => {
       </div>
 
       {showModal && (
-        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Leaderboard API Info</h5>
-                <button type="button" className="btn-close" onClick={() => setShowModal(false)} />
-              </div>
-              <div className="modal-body">
-                <p>Fetching leaderboard data from:</p>
-                <code>{url}</code>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
-                  Close
-                </button>
+        <>
+          <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" role="dialog" aria-hidden="false">
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Leaderboard API Info</h5>
+                  <button type="button" className="btn-close" onClick={() => setShowModal(false)} aria-label="Close" />
+                </div>
+                <div className="modal-body">
+                  <p>Fetching leaderboard data from:</p>
+                  <code>{url}</code>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>
           <div className="modal-backdrop fade show" />
-        </div>
+        </>
       )}
     </div>
   );
